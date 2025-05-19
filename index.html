@@ -4,9 +4,90 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>車両初期メンテナンス作業管理</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      margin: 0;
+      padding: 1em;
+      background: #f5f5f5;
+    }
+    h1 {
+      text-align: center;
+    }
+    form {
+      background: white;
+      padding: 1em;
+      border-radius: 8px;
+      max-width: 700px;
+      margin: auto;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+    .field {
+      margin-bottom: 1em;
+    }
+    label {
+      font-weight: bold;
+      display: block;
+      margin-bottom: 0.3em;
+    }
+    select, input, textarea, button {
+      width: 100%;
+      padding: 0.5em;
+      font-size: 1em;
+    }
+    button {
+      background: #007bff;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      margin-top: 1em;
+    }
+  </style>
 </head>
 <body>
   <h1>車両初期メンテナンス作業管理</h1>
-  <p>GitHub Pages用のHTMLファイルです（コンテンツはCanvas内容に置き換えてください）。</p>
+  <form id="maintenanceForm">
+    <div class="field"><label>作業者名</label><input type="text" name="worker" required /></div>
+    <div class="field"><label>依頼ID</label><input type="text" name="jobId" required /></div>
+    <div class="field"><label>車両写真撮影</label><select name="photo"><option value="">選択</option><option value="済">済</option><option value="不要">不要</option></select></div>
+    <div class="field"><label>バッテリー</label><select name="battery"><option value="">選択</option><option value="交換済">交換済</option><option value="流用">流用</option></select></div>
+    <div class="field"><label>オイル交換</label><select name="oil"><option value="">選択</option><option value="済">済</option><option value="流用">流用</option><option value="不要">不要</option></select></div>
+    <div class="field"><label>エレメント交換</label><select name="element"><option value="">選択</option><option value="済">済</option><option value="流用">流用</option><option value="不要">不要</option></select></div>
+    <div class="field"><label>オイル交換時期シール貼付け</label><select name="oilSeal"><option value="">選択</option><option value="未">未</option><option value="済">済</option><option value="不要">不要</option></select></div>
+    <div class="field"><label>ウォッシャー液</label><select name="washer"><option value="">選択</option><option value="補充済">補充済</option></select></div>
+    <div class="field"><label>クーラント補充</label><select name="coolant"><option value="">選択</option><option value="補充済">補充済</option></select></div>
+    <div class="field"><label>ドア開閉確認</label><select name="doorCheck"><option value="">選択</option><option value="問題無">問題無</option><option value="問題有">問題有</option></select></div>
+    <div class="field"><label>車載ジャッキSET</label><select name="jackSet"><option value="">選択</option><option value="問題無">問題無</option><option value="欠品有">欠品有</option></select></div>
+    <div class="field"><label>ジャッキ欠品項目（該当時のみ）</label><label><input type="checkbox" name="jack"> ジャッキ</label><label><input type="checkbox" name="handle"> ハンドル</label><label><input type="checkbox" name="wrench"> レンチ</label></div>
+    <div class="field"><label>ワイパー（運転席）</label><select name="wiperFront"><option value="">選択</option><option value="交換済">交換済</option><option value="流用">流用</option><option value="不要">不要</option></select></div>
+    <div class="field"><label>ワイパー（助手席）</label><select name="wiperPassenger"><option value="">選択</option><option value="交換済">交換済</option><option value="流用">流用</option><option value="不要">不要</option></select></div>
+    <div class="field"><label>リヤワイパー</label><select name="wiperRear"><option value="">選択</option><option value="交換済">交換済</option><option value="流用">流用</option><option value="不要">不要</option></select></div>
+    <div class="field"><label>タイヤ交換本数</label><select name="tire"><option value="">選択</option><option value="0本">0本</option><option value="1本">1本</option><option value="2本">2本</option><option value="3本">3本</option><option value="4本">4本</option><option value="流用">流用</option></select></div>
+    <div class="field"><label>タイヤ空気圧</label><select name="air"><option value="">選択</option><option value="済">済</option></select></div>
+    <div class="field"><label>シガーソケット</label><select name="cigarette"><option value="">選択</option><option value="問題無">問題無</option><option value="故障有">故障有</option></select></div>
+    <div class="field"><label>エアコン</label><select name="ac"><option value="">選択</option><option value="問題無">問題無</option><option value="故障有">故障有</option></select></div>
+    <div class="field"><label>ヘッドランプ</label><select name="headlamp"><option value="">選択</option><option value="問題無">問題無</option><option value="1個交換">1個交換</option><option value="2個交換">2個交換</option><option value="故障有">故障有</option></select></div>
+    <div class="field"><label>ポジションランプ</label><select name="position"><option value="">選択</option><option value="問題無">問題無</option><option value="1個交換">1個交換</option><option value="2個交換">2個交換</option><option value="故障有">故障有</option></select></div>
+    <div class="field"><label>ウインカーランプ前</label><select name="indicatorFront"><option value="">選択</option><option value="問題無">問題無</option><option value="1個交換">1個交換</option><option value="2個交換">2個交換</option><option value="故障有">故障有</option></select></div>
+    <div class="field"><label>ウインカーランプ後</label><select name="indicatorRear"><option value="">選択</option><option value="問題無">問題無</option><option value="1個交換">1個交換</option><option value="2個交換">2個交換</option><option value="故障有">故障有</option></select></div>
+    <div class="field"><label>ルームランプ（前）</label><select name="roomlampFront"><option value="">選択</option><option value="問題無">問題無</option><option value="1個交換">1個交換</option><option value="2個交換">2個交換</option><option value="故障有">故障有</option></select></div>
+    <div class="field"><label>ルームランプ（後）</label><select name="roomlampRear"><option value="">選択</option><option value="問題無">問題無</option><option value="1個交換">1個交換</option><option value="2個交換">2個交換</option><option value="故障有">故障有</option></select></div>
+    <div class="field"><label>テールランプ</label><select name="tail"><option value="">選択</option><option value="問題無">問題無</option><option value="交換">交換</option><option value="故障有">故障有</option></select></div>
+    <div class="field"><label>バックランプ</label><select name="back"><option value="">選択</option><option value="問題無">問題無</option><option value="交換">交換</option><option value="故障有">故障有</option></select></div>
+    <div class="field"><label>ナンバー灯</label><select name="number"><option value="">選択</option><option value="問題無">問題無</option><option value="交換">交換</option><option value="故障有">故障有</option></select></div>
+    <div class="field"><label>発煙筒</label><select name="flare"><option value="">選択</option><option value="問題無">問題無</option><option value="期限切れ">期限切れ</option></select></div>
+    <div class="field"><label>車内簡易清掃</label><select name="clean"><option value="">選択</option><option value="済">済</option><option value="不要">不要</option></select></div>
+    <div class="field"><label>車両写真ドライブ移行</label><select name="photoDrive"><option value="">選択</option><option value="済">済</option><option value="不要">不要</option></select></div>
+    <div class="field"><label>伝達事項</label><textarea name="note" rows="3" placeholder="例: 傷あり、補足事項など"></textarea></div>
+    <button type="submit">送信</button>
+  </form>
+  <script>
+    document.getElementById("maintenanceForm").addEventListener("submit", function (e) {
+      e.preventDefault();
+      alert("送信完了！（開発用デモ）");
+      this.reset();
+    });
+  </script>
 </body>
 </html>
